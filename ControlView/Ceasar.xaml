@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="MaHoa.ControlView.Ceasar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaHoa.ControlView"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:Card Margin="5" Grid.Column="0">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel
+                    Margin="5">
+                    <TextBlock
+                        FontSize="20"
+                        Text="Chọn file:"/>
+
+                    <Button
+                        x:Name="encodeFile"
+                        Margin="0 10 0 0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Width="150"
+                        Height="auto"
+                        ToolTip="Chọn file" 
+                        Background="#FF168FCE">
+                        <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="100" Kind="File" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                        Margin="20 5 5 5">
+                    <TextBlock
+                        FontSize="20"
+                        Text="Nhập khoá:"/>
+
+                    <TextBox
+                        x:Name="encodeKey"
+                        Margin="0 10 0 0"
+                        FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="Wrap"
+                        Width="300"
+                        VerticalScrollBarVisibility="Auto"
+                        materialDesign:HintAssist.Hint="Nhập khoá"/>
+                </StackPanel>
+            </StackPanel>
+
+        </materialDesign:Card>
+
+        <materialDesign:Card Margin="5" Grid.Column="2">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel
+                    Margin="5">
+                    <TextBlock
+                        FontSize="20"
+                        Text="Chọn file:"/>
+
+                    <Button
+                        x:Name="decodeFile"
+                        Margin="0 10 0 0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Width="150"
+                        Height="auto"
+                        ToolTip="Chọn file" 
+                        Background="#FF168FCE">
+                        <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="100" Kind="File" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                        Margin="20 5 5 5">
+                    <TextBlock
+                        FontSize="20"
+                        Text="Nhập khoá:"/>
+
+                    <TextBox
+                        x:Name="decodeKey"
+                        Margin="0 10 0 0"
+                        FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="Wrap"
+                        Width="300"
+                        VerticalScrollBarVisibility="Auto"
+                        materialDesign:HintAssist.Hint="Nhập khoá"/>
+                </StackPanel>
+            </StackPanel>
+
+        </materialDesign:Card>
+
+    </Grid>
+</UserControl>
