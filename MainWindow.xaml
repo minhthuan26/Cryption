@@ -15,12 +15,9 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="800" Width="1200" Loaded="Load">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Load">
-            <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+        WindowState="Maximized"
+        Title="MainWindow" Height="700" Width="1200" 
+        Loaded="Load">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -36,7 +33,8 @@
                     Style="{StaticResource MaterialDesignPaperButton}"
                     Width="150"
                     ToolTip="Ceasar"
-                    Content="Ceasar" Click="getControlView"/>
+                    Content="Ceasar" 
+                    Click="Ceasar"/>
 
                 <Button
                     FontSize="20"
@@ -44,7 +42,8 @@
                     Style="{StaticResource MaterialDesignPaperButton}"
                     Width="150"
                     ToolTip="Affine"
-                    Content="Affine"/>
+                    Content="Affine" 
+                    Click="Affine"/>
 
                 <Button
                     FontSize="20"
@@ -92,6 +91,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBox
+                    x:Name="plainText"
                     Grid.Column="0"
                     FontSize="20"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -115,7 +115,7 @@
                         Grid.Row="0"
                         Height="50"
                         Style="{StaticResource MaterialDesignPaperButton}"
-                        ToolTip="Encode">
+                        ToolTip="Encode" Click="Encrypt">
                         <materialDesign:PackIcon Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Kind="ArrowRightBold" />
                     </Button>
 
@@ -137,6 +137,7 @@
                 </Grid>
 
                 <TextBox
+                    x:Name="cipherText"
                     Grid.Column="2"
                     FontSize="20"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"

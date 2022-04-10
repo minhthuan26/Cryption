@@ -23,8 +23,8 @@ namespace MaHoa
     /// </summary>
     public partial class MainWindow : Window
     {
-        private UserControl _controlView;
-        public UserControl ControlView { get { if (_controlView == null) _controlView = new Ceasar(); return _controlView; } set { _controlView = value; OnPropertyChanged(); } }
+        private object _controlView;
+        public object ControlView { get { if (_controlView == null) _controlView = new Ceasar(); return _controlView; } set { _controlView = value; OnPropertyChanged(); } }
         public MainWindow()
         {
             InitializeComponent();
@@ -36,19 +36,48 @@ namespace MaHoa
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        private void getControlView(object sender, RoutedEventArgs e)
+        
+        private void Load(object sender, RoutedEventArgs e)
+        {
+            ControlView = (Ceasar) new Ceasar();
+            controlContent.Content = ControlView;
+            cipherName.Text = "Ceasar";
+        }
+        
+        private void Ceasar(object sender, RoutedEventArgs e)
         {
             ControlView = new Ceasar();
             controlContent.Content = ControlView;
             cipherName.Text = "Ceasar";
         }
 
-        private void Load(object sender, RoutedEventArgs e)
+        private void Affine(object sender, RoutedEventArgs e)
         {
-            ControlView = new Ceasar();
+            ControlView = new Affine();
             controlContent.Content = ControlView;
-            cipherName.Text = "Ceasar";
+            cipherName.Text = "Affine";
+        }
+
+        private void Encrypt(object sender, RoutedEventArgs e)
+        {
+            string cipher = cipherName.Text;
+            switch (cipher)
+            {
+                case "Ceasar":
+                    int key;
+                    Ceasar control = (Ceasar) ControlView;
+                    try
+                    {
+                        key = Int32.Parse(control.EncodeKey);
+                        cipherText.Text = Cryption.Ceasar.Encode(plainText.Text, key);
+                    }
+                    catch (FormatException)
+                    {
+                        cipherText.Text = "";
+                        MessageBox.Show("Khoá phải là số nguyên.");
+                    }
+                    break;
+            }
         }
     }
 }
