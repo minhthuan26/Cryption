@@ -35,7 +35,7 @@
                         Width="150"
                         Height="auto"
                         ToolTip="Chọn file" 
-                        Background="#FF168FCE">
+                        Background="#FF168FCE" Click="ReadPlainTextKeyFile">
                         <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="100" Kind="File" />
                     </Button>
                 </StackPanel>
@@ -90,7 +90,7 @@
                         Width="150"
                         Height="auto"
                         ToolTip="Chọn file" 
-                        Background="#FF168FCE">
+                        Background="#FF168FCE" Click="ReadCipherTextKeyFile">
                         <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="100" Kind="File" />
                     </Button>
                 </StackPanel>

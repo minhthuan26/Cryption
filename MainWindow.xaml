@@ -16,144 +16,170 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Title="MainWindow" Height="700" Width="1200" 
+        Title="Mã Hoá" Height="800" Width="1400" 
         Loaded="Load">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <materialDesign:Card Margin="5" Grid.Row="0">
-            <WrapPanel Margin="5">
-                <Button
-                    FontSize="20"
-                    Margin="0 0 5 0"
-                    Style="{StaticResource MaterialDesignPaperButton}"
-                    Width="150"
-                    ToolTip="Ceasar"
-                    Content="Ceasar" 
-                    Click="Ceasar"/>
+    <!--Background="{DynamicResource MaterialDesignPaper}"-->
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90"></RowDefinition>
+                <RowDefinition Height="90"></RowDefinition>
+                <RowDefinition Height="500"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Margin="5" Grid.Row="0">
+                <WrapPanel VerticalAlignment="Center" Margin="5">
+                    <Button
+                        FontSize="20"
+                        Margin="0 0 5 0"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                        Width="150"
+                        Height="60"
+                        VerticalAlignment="Center"
+                        ToolTip="Ceasar"
+                        Content="Ceasar" 
+                        Click="Ceasar" 
+                        Background="#FF168FCE" 
+                        BorderBrush="Black"/>
 
-                <Button
-                    FontSize="20"
-                    Margin="0 0 5 0"
-                    Style="{StaticResource MaterialDesignPaperButton}"
-                    Width="150"
-                    ToolTip="Affine"
-                    Content="Affine" 
-                    Click="Affine"/>
+                    <Button
+                        FontSize="20"
+                        Margin="0 0 5 0"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                        Width="150"
+                        Height="60"
+                        VerticalAlignment="Center"
+                        ToolTip="Affine"
+                        Content="Affine" 
+                        Click="Affine" 
+                        Background="#FF168FCE" 
+                        BorderBrush="Black"/>
 
-                <Button
-                    FontSize="20"
-                    Margin="0 0 5 0"
-                    Style="{StaticResource MaterialDesignPaperButton}"
-                    Width="150"
-                    ToolTip="Vigenere"
-                    Content="Vigenere"/>
+                    <Button
+                        FontSize="20"
+                        Margin="0 0 5 0"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                        Width="150"
+                        Height="60"
+                        VerticalAlignment="Center"
+                        ToolTip="Vigenere"
+                        Content="Vigenere" 
+                        Click="Vigenere"
+                        Background="#FF168FCE" 
+                        BorderBrush="Black"/>
 
-                <Button
-                    FontSize="20"
-                    Margin="0 0 5 0"
-                    Style="{StaticResource MaterialDesignPaperButton}"
-                    Width="150"
-                    ToolTip="Hill"
-                    Content="Hill"/>
+                    <Button
+                        FontSize="20"
+                        Margin="0 0 5 0"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                        Width="150"
+                        Height="60"
+                        VerticalAlignment="Center"
+                        ToolTip="Hill"
+                        Content="Hill"
+                        Click="Hill"
+                        Background="#FF168FCE" 
+                        BorderBrush="Black"/>
 
-                <Button
-                    FontSize="20"
-                    Style="{StaticResource MaterialDesignPaperButton}"
-                    Width="150"
-                    ToolTip="Auto Key"
-                    Content="Auto Key"/>
-            </WrapPanel>
-        </materialDesign:Card>
+                    <Button
+                        FontSize="20"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                        Width="150"
+                        Height="60"
+                        VerticalAlignment="Center"
+                        ToolTip="Rail Fence"
+                        Content="Rail Fence" 
+                        Background="#FF168FCE" 
+                        BorderBrush="Black"/>
+                </WrapPanel>
+            </materialDesign:Card>
 
-        <materialDesign:Card Margin="5" Grid.Row="1">
-            <TextBlock
-                x:Name="cipherName"
-                FontSize="20"
-                FontWeight="Bold"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center">
-                
-            </TextBlock>
-        </materialDesign:Card>
-
-        <materialDesign:Card Margin="5" Grid.Row="2">
-            <Grid 
-                HorizontalAlignment="Stretch"
-                Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBox
-                    x:Name="plainText"
-                    Grid.Column="0"
-                    FontSize="20"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Height="400"
-                    TextWrapping="Wrap"
-                    VerticalScrollBarVisibility="Auto"
-                    materialDesign:HintAssist.Hint="Nhập bản rõ" />
-
-                <Grid
-                    Grid.Column="1"
-                    Height="400"
+            <materialDesign:Card Margin="5" Grid.Row="1">
+                <TextBlock
+                    x:Name="cipherType"
+                    FontSize="32"
+                    FontWeight="Bold"
                     VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+                </TextBlock>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="5" Grid.Row="2">
+                <Grid 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
                     Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        x:Name="plainText"
+                        Grid.Column="0"
+                        FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Height="400"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        materialDesign:HintAssist.Hint="Nhập bản rõ" />
 
-                    <Button
-                        Grid.Row="0"
-                        Height="50"
-                        Style="{StaticResource MaterialDesignPaperButton}"
-                        ToolTip="Encode" Click="Encrypt">
-                        <materialDesign:PackIcon Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Kind="ArrowRightBold" />
-                    </Button>
+                    <Grid
+                        Grid.Column="1"
+                        Height="400"
+                        VerticalAlignment="Center"
+                        Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
 
-                    <Button
-                        Grid.Row="1"
-                        Height="50"
-                        Style="{StaticResource MaterialDesignPaperButton}"
-                        ToolTip="Clear">
-                        <materialDesign:PackIcon Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Kind="CloseCircle" />
-                    </Button>
+                        <Button
+                            Grid.Row="0"
+                            Height="50"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                            ToolTip="Mã hoá" Click="Encrypt" Background="#FF00FB04">
+                            <materialDesign:PackIcon Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Kind="ArrowRightBold" Foreground="#DD000000" />
+                        </Button>
 
-                    <Button
-                        Grid.Row="2"
-                        Height="50"
-                        Style="{StaticResource MaterialDesignPaperButton}"
-                        ToolTip="Decode">
-                        <materialDesign:PackIcon Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Kind="ArrowLeftBold" />
-                    </Button>
+                        <Button
+                            Grid.Row="1"
+                            Height="50"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                            ToolTip="Xoá tất cả" Click="ClearAll" Background="#FFE40C0C">
+                            <materialDesign:PackIcon Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Kind="CloseCircle" Foreground="#DD000000" />
+                        </Button>
+
+                        <Button
+                            Grid.Row="2"
+                            Height="50"
+                            Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+                            ToolTip="Giải mã" Click="Decrypt" Background="#FFFDFF00">
+                            <materialDesign:PackIcon Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Kind="ArrowLeftBold" Foreground="#DD000000" />
+                        </Button>
+                    </Grid>
+
+                    <TextBox
+                        x:Name="cipherText"
+                        Grid.Column="2"
+                        FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Height="400"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        materialDesign:HintAssist.Hint="Nhập bản mã" />
+
                 </Grid>
+            </materialDesign:Card>
 
-                <TextBox
-                    x:Name="cipherText"
-                    Grid.Column="2"
-                    FontSize="20"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Height="400"
-                    TextWrapping="Wrap"
-                    VerticalScrollBarVisibility="Auto"
-                    materialDesign:HintAssist.Hint="Nhập bản mã" />
-                
-            </Grid>
-        </materialDesign:Card>
-
-        <materialDesign:Card
-            VerticalAlignment="Bottom"
-            Margin="5" 
-            Grid.Row="3">
-            <ContentControl x:Name="controlContent"/>
-        </materialDesign:Card>
-    </Grid>
+            <materialDesign:Card
+                VerticalAlignment="Top"
+                Margin="5 5 5 10" 
+                Grid.Row="3">
+                <ContentControl x:Name="controlContent"/>
+            </materialDesign:Card>
+        </Grid>
+    </ScrollViewer>
 </Window>

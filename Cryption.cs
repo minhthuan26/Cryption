@@ -10,6 +10,14 @@ namespace MaHoa
 {
     public static class Cryption
     {
+        private static int Mod_26(int key)
+        {
+            return (key % 26 + 26) % 26;
+        }
+        private static int Mod(int a, int b)
+        {
+            return (a % b + b) % b;
+        }
         public static class Base64
         {
             public static string Encode(string plainText)
@@ -45,15 +53,18 @@ namespace MaHoa
             public static string Encode(string plainText, int a, int b)
             {
                 string cipherText = "";
+                a = Mod_26(a);
+                b = Mod_26(b);
 
                 // Put Plain Text (all capitals) into Character Array
-                char[] chars = plainText.ToUpper().ToCharArray();
+                char[] chars = plainText.ToCharArray();
 
                 // Compute e(x) = (ax + b)(mod m) for every character in the Plain Text
                 foreach (char c in chars)
                 {
-                    int x = Convert.ToInt32(c - 65);
-                    cipherText += Convert.ToChar(((a * x + b) % 26) + 65);
+                    char d = char.IsUpper(c) ? 'A' : 'a';
+                    int x = Convert.ToInt32(c - d);
+                    cipherText += Convert.ToChar(Mod_26(a * x + b) + d);
                 }
 
                 return cipherText;
@@ -67,20 +78,20 @@ namespace MaHoa
             public static string Decode(string cipherText, int a, int b)
             {
                 string plainText = "";
-
+                a = Mod_26(a);
+                b = Mod_26(b);
                 // Get Multiplicative Inverse of a
                 int aInverse = MultiplicativeInverse(a);
 
                 // Put Cipher Text (all capitals) into Character Array
-                char[] chars = cipherText.ToUpper().ToCharArray();
+                char[] chars = cipherText.ToCharArray();
 
                 // Computer d(x) = aInverse * (e(x)  b)(mod m)
                 foreach (char c in chars)
                 {
-                    int x = Convert.ToInt32(c - 65);
-                    if (x - b < 0) 
-                        x = Convert.ToInt32(x) + 26;
-                    plainText += Convert.ToChar(((aInverse * (x - b)) % 26) + 65);
+                    char d = char.IsUpper(c) ? 'A' : 'a';
+                    int x = Convert.ToInt32(c - d);
+                    plainText += Convert.ToChar(Mod_26(aInverse * (x - b)) + d);
                 }
 
                 return plainText;
@@ -110,6 +121,8 @@ namespace MaHoa
                     return ch;
                 }
 
+                key = Mod_26(key);
+                
                 char d = char.IsUpper(ch) ? 'A' : 'a';
                 return (char)(((ch + key - d) % 26) + d);
             }
@@ -130,11 +143,6 @@ namespace MaHoa
 
         public static class Vigenere
         {
-            private static int Mod(int a, int b)
-            {
-                return (a % b + b) % b;
-            }
-
             private static string cipher(string input, string key, bool encipher)
             {
                 for (int i = 0; i < key.Length; ++i)
@@ -153,7 +161,7 @@ namespace MaHoa
                         int keyIndex = (i - nonAlphaCharCount) % key.Length;
                         int k = (cIsUpper ? char.ToUpper(key[keyIndex]) : char.ToLower(key[keyIndex])) - offset;
                         k = encipher ? k : -k;
-                        char ch = (char)((Mod(((input[i] + k) - offset), 26)) + offset);
+                        char ch = (char)((Mod_26(((input[i] + k) - offset))) + offset);
                         output += ch;
                     }
                     else
@@ -244,17 +252,6 @@ namespace MaHoa
             //    return CipherText;
             //}
 
-
-            public static int Mod(int a, int b)
-            {
-                int result = a % b;
-                if (result < 0)
-                {
-                    result += b;
-                }
-                return result;
-            }
-
             public static void Swap(ref int x, ref int y)
             {
                 int tempswap = x;
@@ -311,14 +308,14 @@ namespace MaHoa
                 // checking validity of the key
                 // finding determinant
                 int deter = key2D[0,0] * key2D[1,1] - key2D[0,1] * key2D[1,0];
-                deter = Mod(deter, 26);
+                deter = Mod_26(deter);
 
                 // finding multiplicative inverse
                 int mulInv = -1;
                 for (int i = 0; i < 26; i++)
                 {
                     int tempInv = deter * i;
-                    if (Mod(tempInv, 26) == 1)
+                    if (Mod_26(tempInv) == 1)
                     {
                         mulInv = i;
                         break;
@@ -408,14 +405,14 @@ namespace MaHoa
 
                 // finding determinant
                 int deter = key2D[0,0] * key2D[1,1] - key2D[0,1] * key2D[1,0];
-                deter = Mod(deter, 26);
+                deter = Mod_26(deter);
 
                 // finding multiplicative inverse
                 int mulInv = -1;
                 for (int i = 0; i < 26; i++)
                 {
                     int tempInv = deter * i;
-                    if (Mod(tempInv, 26) == 1)
+                    if (Mod_26(tempInv) == 1)
                     {
                         mulInv = i;
                         break;
@@ -435,8 +432,8 @@ namespace MaHoa
                 key2D[0,1] *= -1;
                 key2D[1,0] *= -1;
 
-                key2D[0,1] = Mod(key2D[0,1], 26);
-                key2D[1,0] = Mod(key2D[1,0], 26);
+                key2D[0,1] = Mod_26(key2D[0,1]);
+                key2D[1,0] = Mod_26(key2D[1,0]);
 
                 // multiplying multiplicative inverse with adjugate matrix
                 for (int i = 0; i < 2; i++)
@@ -450,7 +447,7 @@ namespace MaHoa
                 {
                     for (int j = 0; j < 2; j++)
                     {
-                        key2D[i,j] = Mod(key2D[i,j], 26);
+                        key2D[i,j] = Mod_26(key2D[i,j]);
                     }
                 }
 
