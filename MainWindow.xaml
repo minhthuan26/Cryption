@@ -17,17 +17,20 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Title="Mã Hoá" Height="800" Width="1400" 
-        Loaded="Load">
+        Loaded="Load" Icon="/ma-hoa.jpg">
     <!--Background="{DynamicResource MaterialDesignPaper}"-->
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="90"></RowDefinition>
                 <RowDefinition Height="90"></RowDefinition>
                 <RowDefinition Height="500"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <materialDesign:Card Margin="5" Grid.Row="0">
+            <materialDesign:Card Margin="5,5,5,5" Grid.Row="0">
                 <WrapPanel VerticalAlignment="Center" Margin="5">
                     <Button
                         FontSize="20"
@@ -95,7 +98,7 @@
                 </WrapPanel>
             </materialDesign:Card>
 
-            <materialDesign:Card Margin="5" Grid.Row="1">
+            <materialDesign:Card Margin="5,5,5,5" Grid.Row="1">
                 <TextBlock
                     x:Name="cipherType"
                     FontSize="32"
@@ -106,7 +109,7 @@
                 </TextBlock>
             </materialDesign:Card>
 
-            <materialDesign:Card Margin="5" Grid.Row="2">
+            <materialDesign:Card Margin="5,5,5,5" Grid.Row="2">
                 <Grid 
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
@@ -177,7 +180,7 @@
 
             <materialDesign:Card
                 VerticalAlignment="Top"
-                Margin="5 5 5 10" 
+                Margin="5,5,5,0" 
                 Grid.Row="3">
                 <ContentControl x:Name="controlContent"/>
             </materialDesign:Card>

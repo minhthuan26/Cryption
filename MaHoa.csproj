@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ma-hoa.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
@@ -15,6 +19,10 @@
   <ItemGroup>
     <Folder Include="Properties\" />
     <Folder Include="Resource\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ma-hoa.jpg" />
   </ItemGroup>
 
 </Project>
