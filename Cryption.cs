@@ -18,6 +18,13 @@ namespace MaHoa
         {
             return (a % b + b) % b;
         }
+
+        private static void Swap(ref int x, ref int y)
+        {
+            int tempswap = x;
+            x = y;
+            y = tempswap;
+        }
         public static class Base64
         {
             public static string Encode(string plainText)
@@ -252,17 +259,11 @@ namespace MaHoa
             //    return CipherText;
             //}
 
-            public static void Swap(ref int x, ref int y)
-            {
-                int tempswap = x;
-                x = y;
-                y = tempswap;
-            }
 
             public static string Encode(string plaintText, string key)
             {
                 // message to uppercase & removing white space from plaintText
-                plaintText = plaintText.ToUpper().Trim();
+                plaintText = plaintText.Trim();
 
                 // if plaintText.length %2 != 0 perform padding
                 int lenChk = 0;
@@ -276,31 +277,35 @@ namespace MaHoa
                 int[,] plaintText2D = new int[2,plaintText.Length/2];
                 int itr1 = 0;
                 int itr2 = 0;
+                char[] d = new char[4];
                 for (int i = 0; i < plaintText.Length; i++)
                 {
+                    d[i] = char.IsUpper(plaintText[i]) ? 'A' : 'a';
                     if (i % 2 == 0)
                     {
-                        plaintText2D[0, itr1] = plaintText[i] - 65;
+                        plaintText2D[0, itr1] = plaintText[i] - d[i];
                         itr1++;
                     }
                     else
                     {
-                        plaintText2D[1, itr2] = plaintText[i] - 65;
+                        plaintText2D[1, itr2] = plaintText[i] - d[i];
                         itr2++;
                     }
                 }
 
                 // key to uppercase & removing white space from key
-                key = key.ToUpper().Trim();
+                key = key.Trim();
 
                 // key to 2x2 matrix
                 int[,] key2D = new int[2,2];
                 int itr3 = 0;
+                char[] d2 = new char[4];
                 for (int i = 0; i < 2; i++)
                 {
                     for (int j = 0; j < 2; j++)
                     {
-                        key2D[i,j] = key[itr3] - 65;
+                        d2[itr3] = char.IsUpper(key[itr3]) ? 'A' : 'a';
+                        key2D[i,j] = key[itr3] - d2[itr3];
                         itr3++;
                     }
                 }
@@ -340,9 +345,9 @@ namespace MaHoa
                     for (int i = 0; i < itrCount; i++)
                     {
                         int temp1 = plaintText2D[0,i] * key2D[0,0] + plaintText2D[1,i] * key2D[0,1];
-                        encrypText += (char)((temp1 % 26) + 65);
+                        encrypText += (char)(Mod_26(temp1) + d[i]);
                         int temp2 = plaintText2D[0,i] * key2D[1,0] + plaintText2D[1,i] * key2D[1,1];
-                        encrypText += (char)((temp2 % 26) + 65);
+                        encrypText += (char)(Mod_26(temp2) + d[i]);
                     }
                 }
                 else
@@ -351,9 +356,9 @@ namespace MaHoa
                     for (int i = 0; i < itrCount - 1; i++)
                     {
                         int temp1 = plaintText2D[0,i] * key2D[0,0] + plaintText2D[1,i] * key2D[0,1];
-                        encrypText += (char)((temp1 % 26) + 65);
+                        encrypText += (char)(Mod_26(temp1) + d[i]);
                         int temp2 = plaintText2D[0,i] * key2D[1,0] + plaintText2D[1,i] * key2D[1,1];
-                        encrypText += (char)((temp2 % 26) + 65);
+                        encrypText += (char)(Mod_26(temp2) + d[i]);
                     }
                 }
 
@@ -361,8 +366,9 @@ namespace MaHoa
             }
             public static string Decode(string cipher, string key)
             {
-                // message to uppercase & removing white space from cipher
-                cipher = cipher.ToUpper().Trim();
+                // removing white space from cipher
+                cipher = cipher.Trim();
+                char[] d = new char[4];
                 // if cipher.length %2 != 0 perform padding
                 int lenChk = 0;
                 if (cipher.Length % 2 != 0)
@@ -377,28 +383,31 @@ namespace MaHoa
                 int itr2 = 0;
                 for (int i = 0; i < cipher.Length; i++)
                 {
+                    d[i] = char.IsUpper(cipher[i]) ? 'A' : 'a';
                     if (i % 2 == 0)
                     {
-                        cipher2D[0, itr1] = cipher[i] - 65;
+                        cipher2D[0, itr1] = cipher[i] - d[i];
                         itr1++;
                     }
                     else
                     {
-                        cipher2D[1, itr2] = cipher[i] - 65;
+                        cipher2D[1, itr2] = cipher[i] - d[i];
                         itr2++;
                     }
                 }
-                // key to uppercase & removing white space from key
-                key = key.ToUpper().Trim();
+                // removing white space from key
+                key = key.Trim();
 
                 // key to 2x2 matrix
                 int[,] key2D = new int[2, 2];
                 int itr3 = 0;
+                char[] d2 = new char[4];
                 for (int i = 0; i < 2; i++)
                 {
                     for (int j = 0; j < 2; j++)
                     {
-                        key2D[i, j] = key[itr3] - 65;
+                        d2[itr3] = char.IsUpper(key[itr3]) ? 'A' : 'a';
+                        key2D[i, j] = key[itr3] - d2[itr3];
                         itr3++;
                     }
                 }
@@ -423,6 +432,11 @@ namespace MaHoa
                     }
                 } // for
 
+                if (mulInv == -1)
+                {
+                    MessageBox.Show("Khoá không hợp lệ.");
+                    return null;
+                }
 
                 // adjugate matrix
                 //swapping
@@ -460,9 +474,9 @@ namespace MaHoa
                     for (int i = 0; i < itrCount; i++)
                     {
                         int temp1 = cipher2D[0,i] * key2D[0,0] + cipher2D[1,i] * key2D[0,1];
-                        decrypText += (char)((temp1 % 26) + 65);
+                        decrypText += (char)(Mod_26(temp1) + d[i]);
                         int temp2 = cipher2D[0,i] * key2D[1,0] + cipher2D[1,i] * key2D[1,1];
-                        decrypText += (char)((temp2 % 26) + 65);
+                        decrypText += (char)(Mod_26(temp2) + d[i]);
                     }
                 }
                 else
@@ -470,10 +484,10 @@ namespace MaHoa
                     // if cipher.length % 2 == 0
                     for (int i = 0; i < itrCount - 1; i++)
                     {
-                        int temp1 = cipher2D[0,i] * key2D[0,0] + cipher2D[1,i] * key2D[0,1];
-                        decrypText += (char)((temp1 % 26) + 65);
-                        int temp2 = cipher2D[0,i] * key2D[1,0] + cipher2D[1,i] * key2D[1,1];
-                        decrypText += (char)((temp2 % 26) + 65);
+                        int temp1 = cipher2D[0, i] * key2D[0, 0] + cipher2D[1, i] * key2D[0, 1];
+                        decrypText += (char)(Mod_26(temp1) + d[i]);
+                        int temp2 = cipher2D[0, i] * key2D[1, 0] + cipher2D[1, i] * key2D[1, 1];
+                        decrypText += (char)(Mod_26(temp2) + d[i]);
                     }
                 }
 

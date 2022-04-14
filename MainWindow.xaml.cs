@@ -78,6 +78,8 @@ namespace MaHoa
             ControlView = new Ceasar();
             controlContent.Content = ControlView;
             cipherType.Text = "Ceasar";
+            PlainText = "";
+            CipherText = "";
         }
 
         private void Affine(object sender, RoutedEventArgs e)
@@ -85,6 +87,8 @@ namespace MaHoa
             ControlView = new Affine();
             controlContent.Content = ControlView;
             cipherType.Text = "Affine";
+            PlainText = "";
+            CipherText = "";
         }
 
         private void Vigenere(object sender, RoutedEventArgs e)
@@ -92,6 +96,8 @@ namespace MaHoa
             ControlView = new Vigenere();
             controlContent.Content = ControlView;
             cipherType.Text = "Vigenere";
+            PlainText = "";
+            CipherText = "";
         }
 
         private void Hill(object sender, RoutedEventArgs e)
@@ -99,6 +105,17 @@ namespace MaHoa
             ControlView = new Hill();
             controlContent.Content = ControlView;
             cipherType.Text = "Hill";
+            PlainText = "";
+            CipherText = "";
+        }
+
+        private void RailFence(object sender, RoutedEventArgs e)
+        {
+            ControlView = new RailFence();
+            controlContent.Content = ControlView;
+            cipherType.Text = "Rail Fence";
+            PlainText = "";
+            CipherText = "";
         }
 
         private void Encrypt(object sender, RoutedEventArgs e)
@@ -152,6 +169,28 @@ namespace MaHoa
                     else
                         CipherText = Cryption.Vigenere.Encode(PlainText, vigenereKey);
                     break;
+
+                case "Hill":
+                    Hill hill = (Hill)ControlView;
+                    hill.DecodeKey = "";
+                    string hillKey = hill.EncodeKey;
+                    if (hillKey.Length == 0)
+                    {
+                        CipherText = "";
+                        MessageBox.Show("Khoá không được để trống.");
+                    }
+                    else if(hillKey.Length > 4)
+                    {
+                        CipherText = "";
+                        MessageBox.Show("Khoá không được quá 4 ký tự.");
+                    }
+                    else
+                        CipherText = Cryption.Hill.Encode(PlainText, hillKey);
+                    break;
+
+                case "Rail Fence":
+                    CipherText = Cryption.RailFence.Encode(PlainText);
+                    break;
             }
         }
 
@@ -176,6 +215,15 @@ namespace MaHoa
                     Vigenere vigenere = (Vigenere)ControlView;
                     vigenere.EncodeKey = vigenere.DecodeKey = "";
                     break;
+
+                case "Hill":
+                    Hill hill = (Hill)ControlView;
+                    hill.EncodeKey = hill.DecodeKey = "";
+                    break;
+
+                //case "Rail Fence":
+                //    CipherText = Cryption.RailFence.Encode(PlainText);
+                //    break;
             }
         }
 
@@ -229,6 +277,28 @@ namespace MaHoa
                     }
                     else
                         PlainText = Cryption.Vigenere.Decode(CipherText, vigenereKey);
+                    break;
+
+                case "Hill":
+                    Hill hill = (Hill)ControlView;
+                    hill.EncodeKey = "";
+                    string hillKey = hill.DecodeKey;
+                    if (hillKey.Length == 0)
+                    {
+                        PlainText = "";
+                        MessageBox.Show("Khoá không được để trống.");
+                    }
+                    else if (hillKey.Length > 4)
+                    {
+                        PlainText = "";
+                        MessageBox.Show("Khoá không được quá 4 ký tự.");
+                    }
+                    else
+                        PlainText = Cryption.Hill.Decode(CipherText, hillKey);
+                    break;
+
+                case "Rail Fence":
+                    PlainText = Cryption.RailFence.Decode(CipherText);
                     break;
             }
         }

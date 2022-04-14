@@ -89,7 +89,8 @@
                         VerticalAlignment="Center"
                         ToolTip="Rail Fence"
                         Content="Rail Fence" 
-                        Background="#FF168FCE" 
+                        Background="#FF168FCE"
+                        Click="RailFence"
                         BorderBrush="Black"/>
                 </WrapPanel>
             </materialDesign:Card>
