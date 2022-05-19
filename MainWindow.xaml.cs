@@ -109,11 +109,11 @@ namespace MaHoa
             CipherText = "";
         }
 
-        private void RailFence(object sender, RoutedEventArgs e)
+        private void PlayFair(object sender, RoutedEventArgs e)
         {
-            ControlView = new RailFence();
+            ControlView = new PlayFair();
             controlContent.Content = ControlView;
-            cipherType.Text = "Rail Fence";
+            cipherType.Text = "Play Fair";
             PlainText = "";
             CipherText = "";
         }
@@ -188,8 +188,17 @@ namespace MaHoa
                         CipherText = Cryption.Hill.Encode(PlainText, hillKey);
                     break;
 
-                case "Rail Fence":
-                    CipherText = Cryption.RailFence.Encode(PlainText);
+                case "Play Fair":
+                    PlayFair playFair = (PlayFair)ControlView;
+                    playFair.DecodeKey = "";
+                    string playFairKey = playFair.EncodeKey;
+                    if (playFairKey.Length == 0)
+                    {
+                        CipherText = "";
+                        MessageBox.Show("Khoá không được để trống.");
+                    }
+                    else
+                        CipherText = Cryption.Vigenere.Encode(PlainText, playFairKey);
                     break;
             }
         }
@@ -221,9 +230,10 @@ namespace MaHoa
                     hill.EncodeKey = hill.DecodeKey = "";
                     break;
 
-                //case "Rail Fence":
-                //    CipherText = Cryption.RailFence.Encode(PlainText);
-                //    break;
+                case "Play Fair":
+                    PlayFair playFair = (PlayFair)ControlView;
+                    playFair.EncodeKey = playFair.DecodeKey = "";
+                    break;
             }
         }
 
@@ -297,8 +307,17 @@ namespace MaHoa
                         PlainText = Cryption.Hill.Decode(CipherText, hillKey);
                     break;
 
-                case "Rail Fence":
-                    PlainText = Cryption.RailFence.Decode(CipherText);
+                case "Play Fair":
+                    PlayFair playFair = (PlayFair)ControlView;
+                    playFair.EncodeKey = "";
+                    string playFairKey = playFair.DecodeKey;
+                    if (playFairKey.Length == 0)
+                    {
+                        PlainText = "";
+                        MessageBox.Show("Khoá không được để trống.");
+                    }
+                    else
+                        PlainText = Cryption.Vigenere.Decode(CipherText, playFairKey);
                     break;
             }
         }
