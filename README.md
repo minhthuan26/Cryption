@@ -5,6 +5,8 @@
   - This project use to encode and decode string base on classic cryption: **Ceasar, Affine, Vigenere, Hill, Play Fair**
 ### Technology
   - C#, WPF
+### Members
+  - [Le Minh Thuan](https://github.com/minhthuan26)
 ### UI
   - Ceasar
   ![](./assets/z5516279364591_efac27fcbe4ae610d80dfa63f88dd46e.jpg)
